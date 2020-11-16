@@ -31,7 +31,7 @@ smXtool --type=[sm2 | sm3 | sm4]
         返回格式是16进制
         
         hanfei@g-cloud.com.cn
-        v1.0   2020.11.13
+        v0.9.1   2020.11.15
     """)
 
     sys.exit(extcode)
@@ -40,7 +40,11 @@ smXtool --type=[sm2 | sm3 | sm4]
 def output_hex(byte_str):
     output = []
     for byte in byte_str:
-        output.append(hex(byte)[2:])
+        # in case of 0xY
+        hex_str = hex(byte).replace("0x", "")
+        if len(hex_str) == 1:
+            hex_str = '0' + hex_str
+        output.append(hex_str)
     print(''.join(output))
 
 
@@ -149,6 +153,8 @@ if __name__ == '__main__':
 
     if params.get('type') not in types or \
             params.get('action') not in actions:
+        help_info_and_exit(-1)
+    if params.get('sm4_type') == 'cbc' and not params.get('iv'):
         help_info_and_exit(-1)
 
     types.get(params.get('type'))()
