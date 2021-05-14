@@ -25,13 +25,13 @@ smXtool --type=[sm2 | sm3 | sm4]
         --dec_data=[明文或消息，16进制，如果是解密则不需要此参数]
         --random=[随机字符串，16进制，用于sm2的数字签名]
         --sign=[签名，用于sm2的签名验证]
-        --iv=[sm4加密时使用的填充数据，16进制，sm4_type为cbc时本参数必须]
+        --iv=[sm4加密时使用的填充数据，16进制，长度32的随机值，sm4_type为cbc时本参数必须]
         --sm4_type=[加密算法类型，只能是ecb或cbc，type为sm4时此参数必须]
         
         返回格式是16进制
         
         hanfei@g-cloud.com.cn
-        v0.9.1   2020.11.15
+        v0.9.2   2021.5.14
     """)
 
     sys.exit(extcode)
